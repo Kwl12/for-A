@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forr ARNUR</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #e6f0fa 0%, #d4e4f2 50%, #c2d6e8 100%);
+            color: #1e3a5f;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* floating bubbles */
+        .bubbles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(-30px) translateX(-10px); }
+            75% { transform: translateY(-15px) translateX(5px); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* header */
+        .header {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 15px 35px rgba(30, 58, 95, 0.1);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: #1e3a5f;
+            margin-bottom: 10px;
+        }
+
+        .header h1 span {
+            color: #b9a87c;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #2b4b73;
+            font-weight: 400;
+        }
+
+        .date {
+            display: inline-block;
+            background: rgba(30, 58, 95, 0.1);
+            padding: 10px 25px;
+            border-radius: 50px;
+            margin-top: 20px;
+            font-size: 1rem;
+            border: 1px solid #b9a87c;
+        }
+
+        /* surat */
+        .letter {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 15px 35px rgba(30, 58, 95, 0.1);
+        }
+
+        .letter p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #1e3a5f;
+            font-weight: 400;
+            text-align: justify;
+        }
+
+        .letter p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* musik player */
+        .music-player {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 80px;
+            padding: 20px 30px;
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .music-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .music-icon {
+            width: 50px;
+            height: 50px;
+            background: #1e3a5f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b9a87c;
+            font-size: 1.5rem;
+        }
+
+        .music-title {
+            font-weight: 600;
+            color: #1e3a5f;
+        }
+
+        .music-artist {
+            font-size: 0.9rem;
+            color: #4b7ba0;
+        }
+
+        .play-btn {
+            background: #1e3a5f;
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #b9a87c;
+        }
+
+        .play-btn:hover {
+            background: #b9a87c;
+            color: #1e3a5f;
+        }
+
+        /* galeri */
+        .gallery {
+            margin: 50px 0;
+        }
+
+        .gallery h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #1e3a5f;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .photo-card {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(30, 58, 95, 0.2);
+            border-color: #b9a87c;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-caption {
+            padding: 15px;
+            text-align: center;
+            font-weight: 500;
+            color: #1e3a5f;
+            border-top: 1px solid rgba(185, 168, 124, 0.3);
+        }
+
+        /* pesan */
+        .message-box {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .message-box h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #1e3a5f;
+        }
+
+        .message-input {
+            width: 70%;
+            padding: 15px 20px;
+            border: 2px solid rgba(185, 168, 124, 0.5);
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            background: rgba(255, 255, 255, 0.5);
+            margin-right: 10px;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .message-input:focus {
+            border-color: #b9a87c;
+        }
+
+        .send-btn {
+            background: #1e3a5f;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #b9a87c;
+        }
+
+        .send-btn:hover {
+            background: #b9a87c;
+            color: #1e3a5f;
+        }
+
+        /* footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 2px solid rgba(185, 168, 124, 0.3);
+            color: #1e3a5f;
+        }
+
+        /* modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 58, 95, 0.95);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .modal img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 20px;
+            border: 3px solid #b9a87c;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            color: #b9a87c;
+            font-size: 50px;
+            cursor: pointer;
+        }
+
+        /* responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.5rem; }
+            .music-player { flex-direction: column; gap: 20px; }
+            .message-input { width: 100%; margin-bottom: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bubbles" id="bubbles"></div>
+
+    <div class="container">
+        <!-- header -->
+        <div class="header">
+            <h1>FORR <span></span>YOU</h1>
+            <p>cerita yang ditulis oleh waktu</p>
+            <div class="date">heumm bingung mau nulis apa</div>
+        </div>
+
+        <!-- surat cinta -->
+        <div class="letter">
+            <p>dulu kita berpisah dengan seragam putih-biru, sekarang kita dipertemukan lagi dengan cerita dan mimpi yang berbeda. tapi satu yang masih sama: perasaan ini. dulu aku suka diam-diam, sekarang aku nggak mau nyembunyiin lagi. seneng banget bisa lihat kamu lagi setelah sekian lama. dan kali ini, aku mau kamu tahu kalau aku masih punya rasa yang sama.</p>
+            <p>nggak nyangka kita bisa sampai di titik ini, ya? dulu aku cuma bisa lihat kamu dari kejauhan, malu-malu kalau kebetulan papasan. sekarang? sekarang kita bisa jalan bareng, berangkat sekolah bareng — padahal kita beda sekolah! beda sekolah ternyata bukan halangan, malah jadi alasan buat aku lebih semangat nyempetin waktu ketemu kamu. dulu malu buat deket, sekarang malah nggak mau jauh-jauh. aku nggak tahu ini takdir atau apa, tapi aku bersyukur banget kamu ada di sini, di hidup aku lagi.</p>
+        </div>
+
+        <!-- music player dengan lagu spesial -->
+        <div class="music-player">
+            <div class="music-info">
+                <div class="music-icon">♪</div>
+                <div>
+                    <div class="music-title">lagu spesial FORR YOUU</div>
+                    <div class="music-artist">dari seseorang yang selalu</div>
+                </div>
+            </div>
+            <audio id="specialSong" src="https://files.catbox.moe/3zr2db.m4a"></audio>
+            <button class="play-btn" onclick="toggleMusic()" id="playButton">putar lagu</button>
+        </div>
+
+        <!-- galeri foto -->
+        <div class="gallery">
+            <h2>ABOUT YOU</h2>
+            <div class="gallery-grid">
+                <div class="photo-card" onclick="openModal('https://files.catbox.moe/rioxl2.jpg')">
+                    <img src="https://files.catbox.moe/rioxl2.jpg" alt="kenangan 1" loading="lazy">
+                    <div class="photo-caption">🤍🤍</div>
+                </div>
+                <div class="photo-card" onclick="openModal('https://files.catbox.moe/um3968.jpg')">
+                    <img src="https://files.catbox.moe/um3968.jpg" alt="kenangan 2" loading="lazy">
+                    <div class="photo-caption">momen berharga</div>
+                </div>
+                <div class="photo-card" onclick="openModal('https://files.catbox.moe/t82wv8.jpg')">
+                    <img src="https://files.catbox.moe/t82wv8.jpg" alt="kenangan 3" loading="lazy">
+                    <div class="photo-caption">😵‍💫</div>
+                </div>
+                <div class="photo-card" onclick="openModal('https://files.catbox.moe/lop7lw.jpg')">
+                    <img src="https://files.catbox.moe/lop7lw.jpg" alt="kenangan 4" loading="lazy">
+                    <div class="photo-caption">fresh flowers for you🤭</div>
+                </div>
+                <div class="photo-card" onclick="openModal('https://files.catbox.moe/3bfj9e.jpg')">
+                    <img src="https://files.catbox.moe/3bfj9e.jpg" alt="kenangan 5" loading="lazy">
+                    <div class="photo-caption">tak terlupakan</div>
+                </div>
+                <div class="photo-card" onclick="openModal('https://files.catbox.moe/rioxl2.jpg')">
+                    <img src="https://files.catbox.moe/rioxl2.jpg" alt="kenangan 6" loading="lazy">
+                    <div class="photo-caption">selalu di hati</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- kotak pesan -->
+        <div class="message-box">
+            <h3>tinggalkan pesan untuk my</h3>
+            <input type="text" class="message-input" id="messageInput" placeholder="tulis pesanmu disini...">
+            <button class="send-btn" onclick="sendMessage()">kirim</button>
+            <div id="messageResponse" style="margin-top: 20px;"></div>
+        </div>
+
+        <!-- footer -->
+        <div class="footer">
+            <p>dibuat olehh siapaa yahh kira kira🤭🤔</p>
+            <p style="font-size: 0.9rem; margin-top: 10px;">dari seseorang yang senang telah bertemu kembalii</p>
+        </div>
+    </div>
+
+    <!-- modal buat foto fullscreen -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img id="modalImage">
+    </div>
+
+    <script>
+        // bubble background
+        function createBubbles() {
+            const container = document.getElementById('bubbles');
+            for (let i = 0; i < 20; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 60 + 20;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = Math.random() * 100 + '%';
+                bubble.style.bottom = '-100px';
+                bubble.style.animationDelay = Math.random() * 10 + 's';
+                bubble.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                bubble.style.background = `rgba(255, 255, 255, ${Math.random() * 0.3})`;
+                container.appendChild(bubble);
+            }
+        }
+
+        // music player
+        const audio = document.getElementById('specialSong');
+        const playButton = document.getElementById('playButton');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                playButton.textContent = 'putar lagu';
+                isPlaying = false;
+            } else {
+                audio.play();
+                playButton.textContent = 'hentikan lagu';
+                isPlaying = true;
+            }
+        }
+
+        // modal functions
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = imgSrc;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // send message
+        function sendMessage() {
+            const message = document.getElementById('messageInput').value;
+            const response = document.getElementById('messageResponse');
+            
+            if (message.trim() === '') {
+                response.innerHTML = '✧ tulis pesannya dulu ya ✧';
+                response.style.color = '#b9a87c';
+            } else {
+                response.innerHTML = '✧ pesan terkirim! arnur pasti senang ✧';
+                response.style.color = '#1e3a5f';
+                document.getElementById('messageInput').value = '';
+            }
+            
+            setTimeout(() => {
+                response.innerHTML = '';
+            }, 3000);
+        }
+
+        // close modal when click outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        // auto pause when song ends
+        audio.addEventListener('ended', function() {
+            playButton.textContent = 'putar lagu';
+            isPlaying = false;
+        });
+
+        // initialize
+        createBubbles();
+    </script>
+</body>
+</html>
